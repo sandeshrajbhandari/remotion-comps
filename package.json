@@ -13,18 +13,23 @@
   "repository": {},
   "license": "UNLICENSED",
   "dependencies": {
+    "@code-hike/lighter": "^1.0.3",
     "@remotion/bundler": "^4.0.358",
     "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.361",
+    "@remotion/layout-utils": "^4.0.361",
     "@remotion/noise": "^4.0.361",
     "@remotion/renderer": "^4.0.358",
     "@remotion/zod-types": "^4.0.0",
     "@types/react-syntax-highlighter": "^15.5.13",
     "codehike": "^1.0.7",
     "express": "^5.1.0",
+    "polished": "^4.3.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-syntax-highlighter": "^15.6.6",
     "remotion": "^4.0.0",
+    "twoslash-cdn": "^0.3.4",
     "zod": "3.22.3"
   },
   "devDependencies": {

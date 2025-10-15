@@ -62,38 +62,6 @@ async function initializeBundle() {
     return bundleLocation;
 }
 
-// Utility function to extract inputProps from defaultProps
-function extractInputPropsFromDefaults(defaultProps: any): { name: string; type: string }[] {
-    if (!defaultProps || typeof defaultProps !== 'object') {
-        return [];
-    }
-
-    return Object.entries(defaultProps).map(([key, value]) => {
-        let type = 'unknown';
-
-        if (typeof value === 'string') {
-            // Check if it's a color (hex color pattern)
-            if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
-                type = 'color';
-            } else {
-                type = 'string';
-            }
-        } else if (typeof value === 'number') {
-            type = 'number';
-        } else if (typeof value === 'boolean') {
-            type = 'boolean';
-        } else if (Array.isArray(value)) {
-            type = 'array';
-        } else if (typeof value === 'object' && value !== null) {
-            type = 'object';
-        }
-
-        return {
-            name: key,
-            type
-        };
-    });
-}
 
 // Generate filename with timestamp
 function generateFilename(compositionId: string, isStill: boolean = false): string {
@@ -143,6 +111,49 @@ async function ensurePublicDir() {
     } catch {
         await fs.mkdir(publicDir, { recursive: true });
     }
+}
+
+// Build file tree for public directory
+async function buildPublicFileTree(): Promise<any[]> {
+    const publicDir = path.resolve('./public');
+
+    async function buildTree(dirPath: string, relativePath: string = ''): Promise<any[]> {
+        const items = await fs.readdir(dirPath);
+        const tree = [];
+
+        for (const item of items) {
+            const fullPath = path.join(dirPath, item);
+            const relativeItemPath = path.join(relativePath, item).replace(/\\/g, '/');
+            const stats = await fs.stat(fullPath);
+
+            if (stats.isDirectory()) {
+                const children = await buildTree(fullPath, relativeItemPath);
+                tree.push({
+                    name: item,
+                    path: relativeItemPath,
+                    type: 'directory',
+                    children: children
+                });
+            } else {
+                tree.push({
+                    name: item,
+                    path: relativeItemPath,
+                    type: 'file',
+                    size: stats.size,
+                    modified: stats.mtime
+                });
+            }
+        }
+
+        return tree.sort((a, b) => {
+            // Sort directories first, then files alphabetically
+            if (a.type === 'directory' && b.type === 'file') return -1;
+            if (a.type === 'file' && b.type === 'directory') return 1;
+            return a.name.localeCompare(b.name);
+        });
+    }
+
+    return await buildTree(publicDir);
 }
 
 // Save base64 image to public directory
@@ -368,8 +379,7 @@ app.get('/compositions', async (req, res) => {
 
         // Extract inputProps information from defaultProps
         const compositionsWithSchema = compositions.map(comp => {
-            const inputProps = extractInputPropsFromDefaults(comp.defaultProps);
-
+            console.log(comp)
             return {
                 id: comp.id,
                 // durationInFrames: comp.durationInFrames,
@@ -377,13 +387,16 @@ app.get('/compositions', async (req, res) => {
                 // width: comp.width,
                 // height: comp.height,
                 defaultProps: comp.defaultProps,
-                // inputProps
             };
         });
 
+        // Build file tree for public directory
+        const publicFileTree = await buildPublicFileTree();
+
         res.json({
             success: true,
-            compositions: compositionsWithSchema
+            compositions: compositionsWithSchema,
+            publicFileTree: publicFileTree
         });
     } catch (error) {
         console.error('Error listing compositions:', error);

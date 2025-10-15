@@ -1,0 +1,17 @@
+```python
+import { z } from "zod";
+import { CalculateMetadataFunction } from "remotion";
+import { getThemeColors } from "@code-hike/lighter";
+import { codeTransitionSchema } from "../compositionRegistry";
+import { processSnippet, CodeStep } from "./process-snippet";
+import { measureText } from "@remotion/layout-utils";
+import {
+  fontFamily,
+  fontSize,
+  horizontalPadding,
+  tabSize,
+  waitUntilDone,
+} from "./font";
+import { HighlightedCode } from "codehike/code";
+import { Theme } from "./theme";
+```

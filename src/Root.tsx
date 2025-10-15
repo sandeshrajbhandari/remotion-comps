@@ -42,6 +42,7 @@ export const DefaultScreen: React.FC = () => {
             height={entry.height}
             schema={entry.schema as any}
             defaultProps={entry.defaultProps}
+            calculateMetadata={entry.calculateMetadata as any}
           />
         ))}
     </>

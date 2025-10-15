@@ -1,70 +1,136 @@
 {
     "shots": [
         {
-            "sentence": "I made a coding agent using Python and Olama that runs on my 4-year-old MacBook M1.",
+            "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
             "start_time": 0.0,
-            "end_time": 5.28,
-            "compositionId": "ImageScreen",
+            "end_time": 5.3,
+            "compositionId": "TitleScreenDotBg",
             "compositionProps": {
-                "titleText": "Coding Agent on MacBook",
-                "imageSource": "https://imgs.search.brave.com/y4aahJnEro56covSl-3LEdHiGClPuWSYadZA02mpws8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbGF5/LWxoLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9mS25scFl3ejla/b1ZKMUYwR0VCN0FV/MjI0T09iRDRxQnZX/NlpjY3BBY2NWN25H/U0tfbFNIRFd1eWtV/T0xlNjVoNzJJPXc1/MjYtaDI5Ni1ydw"
+                "titleText": "Coding Agent on MacBook M1",
+                "titleColor": "#000000"
             },
-            "notes": "Visual representation of the coding agent running on a MacBook to introduce the topic."
+            "notes": "Strong opening title screen to introduce the project and platform."
         },
         {
-            "sentence": "This was a great learning experience to understand how more advanced coding agents like CloudCodeCode, Cursor and GitHub Copilot works under the hood.",
+            "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
             "start_time": 6.04,
-            "end_time": 14.24,
-            "compositionId": "TitleScreenStill",
+            "end_time": 13.26,
+            "compositionId": "TextScreen",
             "compositionProps": {
-                "titleText": "Learning Experience: CloudCodeCode, Cursor, GitHub Copilot",
-                "titleColor": "#000000"
+                "titleText": "Inspired By",
+                "longMultiLineText": "Cloud Code\nCursor\nGitHub Copilot"
             },
-            "notes": "Text overlay listing the advanced coding agents for clarity."
+            "notes": "Use TextScreen to list the key competitors/inspirations."
         },
         {
-            "sentence": "It also showcases how small and local 8B models like when 8B that can literally run on your hardware for free perform under different coding tasks.",
-            "start_time": 14.9,
-            "end_time": 23.76,
-            "compositionId": "TitleScreenStill",
+            "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
+            "start_time": 13.84,
+            "end_time": 22.68,
+            "compositionId": "TypewriterText",
             "compositionProps": {
-                "titleText": "Small 8B Models: Win 8B on Your Hardware",
-                "titleColor": "#000000"
+                "text": "Local 8B Models: Run FREE on Your Hardware",
+                "speed": 3
             },
-            "notes": "Highlighting the efficiency of small, local models with a text overlay."
+            "notes": "Typewriter effect to emphasize the key takeaway about local, free models."
         },
         {
             "sentence": "This coding agent has a very minimal set of tools.",
-            "start_time": 24.6,
-            "end_time": 27.18,
+            "start_time": 23.580000000000002,
+            "end_time": 26.18,
             "compositionId": "TitleScreenStill",
             "compositionProps": {
-                "titleText": "Minimal Toolset",
+                "titleText": "Minimal Tools",
                 "titleColor": "#000000"
             },
-            "notes": "Simple text emphasizing the minimal toolset."
+            "notes": "Simple title card for a section break."
         },
         {
-            "sentence": "The agent has access to the following tools.",
-            "start_time": 28.46,
-            "end_time": 30.56,
-            "compositionId": "TitleScreenStill",
+            "sentence": "The agent has access to the following tools. The most used tools are red file, list files, edit file and run command tools.",
+            "start_time": 26.92,
+            "end_time": 35.54,
+            "compositionId": "TextScreen",
             "compositionProps": {
-                "titleText": "Agent Tools:",
-                "titleColor": "#000000"
+                "titleText": "Key Tools",
+                "longMultiLineText": "Read File\nList Files\nEdit File\nRun Command"
             },
-            "notes": "Introduces the list of tools."
+            "notes": "List the core tools the agent uses."
         },
         {
-            "sentence": "The most used tools are RedFile, ListFiles, EditFile and Run command tools.",
-            "start_time": 31.22,
-            "end_time": 36.7,
-            "compositionId": "TitleScreenStill",
+            "sentence": "It essentially runs in a loop as long as there are tool calls and responses.",
+            "start_time": 36.22,
+            "end_time": 40.1,
+            "compositionId": "TypewriterText",
             "compositionProps": {
-                "titleText": "RedFile, ListFiles, EditFile, Run Command",
-                "titleColor": "#000000"
+                "text": "Tool Calls & Responses Loop",
+                "speed": 3
             },
-            "notes": "Lists the specific tools as a text overlay."
+            "notes": "Emphasize the 'loop' mechanism with a dynamic text display."
+        },
+        {
+            "sentence": "For example, in the first response, it might try to read the project structure using list files tool. The result from list files is then again fed to the LLM, then it finds the file it wants to change.",
+            "start_time": 40.62,
+            "end_time": 51.28,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "steps": [
+                    {
+                        "code": " $ ls -R\n.\n├── main.py  \n├── README.md\n└── utils",
+                        "title": "1. List Files Tool"
+                    }
+                ],
+                "language": "bash",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "First step in the loop: using the 'list files' tool. Use a terminal/bash simulation."
+        },
+        {
+            "sentence": "For example, main.py in a Python project. And then it uses read file tool to read the code in that file.",
+            "start_time": 51.82,
+            "end_time": 58.12,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "steps": [
+                    {
+                        "code": "def calculate_sum(a, b):\n    # TODO: Add error handling\n    return a + b\n\nif __name__ == '__main__':\n    print(calculate_sum(5, 3))",
+                        "title": "2. Read File Tool (main.py)"
+                    }
+                ],
+                "language": "python",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Second step: using the 'read file' tool, showing code content."
+        },
+        {
+            "sentence": "In the next loop step, it tries to edit the file using edit file or write file tool and make the changes.",
+            "start_time": 58.64,
+            "end_time": 63.5,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "steps": [
+                    {
+                        "code": "def calculate_sum(a, b):\n    # CHANGES MADE HERE\n    if not all(isinstance(x, (int, float)) for x in [a, b]):\n        raise TypeError(\"Inputs must be numbers\")\n    return a + b",
+                        "title": "3. Edit File Tool"
+                    }
+                ],
+                "language": "python",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Third step: using the 'edit file' tool, showing a code change."
+        },
+        {
+            "sentence": "Once LLM thinks it has completed the task in the user prompt, it stops the tool calls and responds with more questions for future tasks or a summary of what it has done.",
+            "start_time": 64.14,
+            "end_time": 72.68,
+            "compositionId": "AvatarScreen",
+            "compositionProps": {
+                "titleText": "Task Complete!",
+                "imageSource": "avatars/avatar-hand-fold.png",
+                "alignment": "left"
+            },
+            "notes": "Final conclusion screen with an avatar for a personal touch."
         }
     ]
 }
