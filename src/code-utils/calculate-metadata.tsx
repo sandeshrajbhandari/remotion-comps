@@ -64,6 +64,7 @@ export const calculateMetadata: CalculateMetadataFunction<
     width: minimumWidthApplied,
     props: {
       ...props,
+
       steps: highlightedSteps,
       themeColors,
       codeWidth,

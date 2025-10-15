@@ -21,13 +21,22 @@ import { calculateMetadata } from "./code-utils/calculate-metadata";
 import transcriptData from "../public/transcript.json";
 
 // Convert transcript data to shots format
-const convertTranscriptToShots = (transcript: any): Shot[] => {
+const convertTranscriptToShots = (transcript: any, useNextShotStartTimeForDuration: boolean = true): Shot[] => {
     const fps = 30; // Standard frame rate
 
-    return transcript.shots.map((shot: any, index: number) => {
+    return transcript.shots.map((shot: any, index: number, shots: any[]) => {
         const startTimeSeconds = shot.start_time;
-        const endTimeSeconds = shot.end_time;
-        const durationSeconds = endTimeSeconds - startTimeSeconds;
+        let durationSeconds: number;
+
+        if (useNextShotStartTimeForDuration && index < shots.length - 1) {
+            // Use the next shot's start_time to calculate duration
+            const nextStartTime = shots[index + 1].start_time;
+            durationSeconds = nextStartTime - startTimeSeconds;
+        } else {
+            // Use the current shot's end_time to calculate duration
+            const endTimeSeconds = shot.end_time;
+            durationSeconds = endTimeSeconds - startTimeSeconds;
+        }
 
         return {
             compositionId: shot.compositionId,
@@ -226,10 +235,11 @@ export const compositionRegistry: RegistryEntry[] = [
         schema: codeTransitionSchema,
         calculateMetadata: calculateMetadata,
         defaultProps: {
+            title: "",
             steps: [
                 {
                     code: `def calculate_sum(a, b): \n # TODO: Add error handling\n \nreturn a + b\n\nif __name__ == '__main__': \n    print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n `,
-                    title: "Initial Code",
+
                 },
                 //                 {
                 //                     code: `const user = {

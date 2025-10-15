@@ -18,6 +18,7 @@ export type Props = {
 
 export const MainComposition: React.FC<Props> = ({
     steps,
+    title,
     themeColors,
     codeWidth,
     language,
@@ -97,7 +98,9 @@ export const MainComposition: React.FC<Props> = ({
                     }}
                 >
                     {/* <ProgressBar steps={steps} /> */}
+
                     <AbsoluteFill style={style} className="flex items-center justify-center">
+                        {title && <h1>{title}</h1>}
                         <Series>
                             {steps.map((step, index) => (
                                 <Series.Sequence
@@ -106,6 +109,7 @@ export const MainComposition: React.FC<Props> = ({
                                     durationInFrames={stepDuration}
                                     name={step.meta}
                                 >
+
                                     <CodeTransition
                                         oldCode={steps[index - 1]}
                                         newCode={step}
