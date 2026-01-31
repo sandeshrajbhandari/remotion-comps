@@ -91,41 +91,46 @@ export const MainComposition: React.FC<Props> = ({
         <ThemeProvider themeColors={themeColors}>
             <AbsoluteFill style={outerStyle}>
                 <AbsoluteFill
-                    style={{
-                        width: codeWidth || "100%",
-                        margin: "auto",
 
-                    }}
                 >
                     {/* <ProgressBar steps={steps} /> */}
 
-                    <AbsoluteFill style={style} className="flex items-center justify-center">
-                        {title && <h1>{title}</h1>}
-                        <Series>
-                            {steps.map((step, index) => (
-                                <Series.Sequence
-                                    key={index}
-                                    layout="none"
-                                    durationInFrames={stepDuration}
-                                    name={step.meta}
-                                >
+                    <AbsoluteFill style={style} className="m-auto flex items-center justify-center scale-75">
+                        {title && <h1 className="text-center text-white text-8xl font-bold">{title}</h1>}
+                        <div style={{
+                            width: codeWidth || "100%",
+                            border: "1px solid white",
+                            borderRadius: "10px",
+                            padding: "2rem 4rem",
 
-                                    <CodeTransition
-                                        oldCode={steps[index - 1]}
-                                        newCode={step}
-                                        durationInFrames={transitionDuration}
-                                        codeWidth={codeWidth || undefined}
-                                        codeHeight={codeHeight || undefined}
-                                        maxCharacters={maxCharacters}
-                                        containerWidth={1920}
-                                        containerHeight={1080}
-                                    />
-                                </Series.Sequence>
-                            ))}
-                        </Series>
+                        }}>
+                            <Series>
+                                {steps.map((step, index) => (
+                                    <Series.Sequence
+                                        key={index}
+                                        layout="none"
+                                        durationInFrames={stepDuration}
+                                        name={step.meta}
+                                    >
+
+                                        <CodeTransition
+                                            oldCode={steps[index - 1]}
+                                            newCode={step}
+                                            durationInFrames={transitionDuration}
+                                            codeWidth={codeWidth || undefined}
+                                            codeHeight={codeHeight || undefined} 
+                                            maxCharacters={maxCharacters}
+                                            containerWidth={1920}
+                                            containerHeight={1080}
+                                        />
+                                    </Series.Sequence>
+                                ))}
+                            </Series>
+                        </div>
+
                     </AbsoluteFill>
                 </AbsoluteFill>
             </AbsoluteFill>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 };

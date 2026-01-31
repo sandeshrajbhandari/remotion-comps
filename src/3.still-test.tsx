@@ -5,8 +5,40 @@ import { zColor } from "@remotion/zod-types";
 import { getImageSrc } from "./utils/imageUtils";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ReactMarkdown from 'react-markdown';
 
 import { DotBgAnim } from "./components/backgroundsCustom";
+
+// Utility function to calculate font size based on content length and available space
+const calculateFontSize = (content: string, containerWidth: number, containerHeight: number): string => {
+    const words = content.split(/\s+/).length;
+    const lines = content.split('\n').length;
+    const characters = content.length;
+
+    // Base font size calculations
+    let baseSize = 60; // Default large size
+
+    // Reduce size for longer content
+    if (words > 100) baseSize = 24;
+    else if (words > 50) baseSize = 32;
+    else if (words > 30) baseSize = 36;
+    else if (words > 15) baseSize = 40;
+
+    // Adjust for line count (more lines = smaller font)
+    if (lines > 20) baseSize *= 0.6;
+    else if (lines > 15) baseSize *= 0.7;
+    else if (lines > 10) baseSize *= 0.8;
+    else if (lines > 5) baseSize *= 0.9;
+
+    // Adjust for character count (very long words need smaller font)
+    if (characters > 1000) baseSize *= 0.7;
+    else if (characters > 500) baseSize *= 0.8;
+
+    // Ensure minimum and maximum font sizes
+    baseSize = Math.max(16, Math.min(64, baseSize));
+
+    return `${baseSize}px`;
+};
 
 // Function to detect programming language from code content
 const detectLanguage = (code: string): string => {
@@ -127,13 +159,13 @@ export const TitleScreen: React.FC<z.infer<typeof myCompSchema3>> = ({
     titleColor,
 }) => {
     return (
-        <AbsoluteFill className="flex flex-col bg-url justify-center items-center gap-8">
+        <AbsoluteFill className="flex flex-col bg-url bg-amber-50 justify-center items-center gap-8">
             {/* background image */}
             {/* <Img src={"https://walker-web.imgix.net/cms/Gradient_builder_2.jpg?auto=format,compress&w=1920&h=1200&fit=crop&dpr=1.5"} className="absolute inset-0 w-full h-full object-cover -z-30" /> */}
-            <Img src={getImageSrc("backdrops/paper-texture-1.jpg")} className="absolute inset-0 w-full h-full object-fill -z-30" />
+            {/* <Img src={getImageSrc("backdrops/paper-texture-1.jpg")} className="absolute inset-0 w-full h-full object-fill -z-30" /> */}
 
             <div className="text-center">
-                <h1 className="text-9xl font-bold  px-16 py-16 rounded-xl shadow-2xl" style={{ color: titleColor }}>
+                <h1 className="text-[10rem] font-bold font-podkova px-16 py-16 rounded-xl shadow-2xl" style={{ color: titleColor }}>
                     {titleText}
                 </h1>
             </div>
@@ -177,7 +209,7 @@ export const AvatarScreen: React.FC<{
             <AbsoluteFill className="bg-gray-600">
                 {alignment === "center" ? (
                     <div className="flex justify-center items-center h-full">
-                        <Img src={getImageSrc(imageSource)} className="rounded-full shadow-2xl h-[50vh] w-[50vh] object-cover" />
+                        <Img src={getImageSrc(imageSource)} className="rounded-2xl max-h-[90vh]  object-cover flex-1/3" />
                     </div>
                 ) : (
                     <>
@@ -197,12 +229,32 @@ export const AvatarScreen: React.FC<{
 export const TypewriterText: React.FC<{
     text: string;
     speed?: number; // frames per character
+    durationInFrames?: number;
 }> = ({
     text,
     speed = 3, // A new character every 3 frames by default
+    durationInFrames = undefined,
 }) => {
         const frame = useCurrentFrame();
-
+        // Utility to calculate speed so text fits in duration
+        function getTypewriterSpeed(
+            text: string,
+            requestedSpeed: number,
+            durationInFrames: number | undefined,
+            bufferFrames: number = 60
+        ) {
+            if (!durationInFrames) {
+                return requestedSpeed;
+            }
+            const chars = text.length;
+            const maxFramesForTyping = durationInFrames - bufferFrames;
+            let speed = requestedSpeed;
+            if (chars * requestedSpeed > maxFramesForTyping) {
+                speed = Math.floor(maxFramesForTyping / chars) || 1;
+            }
+            return speed;
+        }
+        speed = getTypewriterSpeed(text, speed, durationInFrames);
         // Local variables for customization - can be modified later
         const fontSize = 'text-5xl';
         const fontFamily = 'font-sans';
@@ -255,28 +307,43 @@ export const TitleScreenDotBg: React.FC<z.infer<typeof myCompSchema3>> = ({
     );
 };
 
-// TextScreen with a header and a body usually an opening or two with a short list of 3,4 items or less.
+// TextScreen with markdown content and dynamic font sizing
 export const TextScreen: React.FC<{
     titleText: string;
-    longMultiLineText: string;
+    markdownText: string;
 }> = ({
     titleText,
-    longMultiLineText,
+    markdownText,
 }) => {
+        // Calculate dynamic font size for the content
+        const contentFontSize = calculateFontSize(markdownText, 800, 600); // Approximate container dimensions
+
         return (
             <AbsoluteFill className="">
-                (
                 <>
                     <Img src={getImageSrc("backdrops/grid-bg-1.jpg")} className="absolute inset-0 w-full h-full object-cover -z-30" />
-                    <div className={`flex-col items-center h-full px-32 gap-2 bg-yellow-50 `}>
-                        {/* <Img src=className="rounded-2xl max-h-[90vh]  object-cover flex-1/3" /> */}
-                        <h1 className="px-6 pt-20 rounded-lg text-center flex-2/3 w-full" style={{
-                            fontSize: titleText.length > 30 ? '2rem' : titleText.length > 20 ? '3rem' : '7rem'
+                    <div className={`flex flex-col items-center h-full px-8  bg-yellow-50`}>
+                        <h1 className="px-6 pt-40 pb-20 rounded-lg text-center w-full" style={{
+                            fontSize: titleText.length > 30 ? '2rem' : titleText.length > 20 ? '4rem' : '5rem'
                         }}>{titleText}</h1>
-                        <p className="bg-yellow-50 px-20 text-5xl py-20 rounded-lg flex-2/3 w-3/4 mx-auto whitespace-pre-line">{longMultiLineText}</p>
+
+                        <div className="flex items-center justify-center w-full max-w-[80%] mx-auto">
+                            <div className="bg-yellow-50 px-8 rounded-lg w-full max-h-full ">
+                                <div
+                                    className="prose prose-lg max-w-none"
+                                    style={{
+                                        fontSize: contentFontSize,
+                                        lineHeight: '1.4',
+                                    }}
+                                >
+                                    <ReactMarkdown>
+                                        {markdownText}
+                                    </ReactMarkdown>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </>
-                )
             </AbsoluteFill>
         );
     };

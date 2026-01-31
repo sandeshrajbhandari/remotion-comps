@@ -1,0 +1,262 @@
+{
+    "shots": [
+        {
+            "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
+            "start_time": 0.0,
+            "end_time": 2.5,
+            "compositionId": "TitleScreenDotBg",
+            "compositionProps": {
+                "titleText": "Code Agent: Python + Ollama 🐍",
+                "titleColor": "#000000"
+            },
+            "notes": "Introduce the main topic: a coding agent built with Python and Ollama."
+        },
+        {
+            "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
+            "start_time": 2.5,
+            "end_time": 5.3,
+            "compositionId": "ImageScreen",
+            "compositionProps": {
+                "titleText": "Runs on MacBook M1 💻",
+                "imageSource": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=2670"
+            },
+            "notes": "Highlight the low-power hardware constraint (MacBook M1) with a tech/code image."
+        },
+        {
+            "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
+            "start_time": 6.04,
+            "end_time": 9.5,
+            "compositionId": "TypewriterText",
+            "compositionProps": {
+                "text": "A Great Learning Experience! 💡",
+                "speed": 3
+            },
+            "notes": "Emphasize the project's value as a learning experience."
+        },
+        {
+            "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
+            "start_time": 9.5,
+            "end_time": 13.26,
+            "compositionId": "TextScreen",
+            "compositionProps": {
+                "titleText": "Inspired By Advanced Agents:",
+                "markdownText": "☁️ Claude Code\n🖱️ Cursor\n🐙 GitHub Copilot"
+            },
+            "notes": "List the advanced coding agents that served as inspiration."
+        },
+        {
+            "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
+            "start_time": 13.84,
+            "end_time": 18.0,
+            "compositionId": "TypewriterText",
+            "compositionProps": {
+                "text": "Showcases small & local 8B models (e.g., Qwen 8B) 🧠",
+                "speed": 3
+            },
+            "notes": "Highlight the use of small, efficient local models like Qwen 8B (as found in the code: `model = 'qwen3:8b'`)."
+        },
+        {
+            "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
+            "start_time": 18.0,
+            "end_time": 22.68,
+            "compositionId": "AvatarScreen",
+            "compositionProps": {
+                "titleText": "Runs FREE on Your Hardware! ⚙️",
+                "imageSource": "avatars/avatar-hand-thumbsup.png",
+                "alignment": "center"
+            },
+            "notes": "Emphasize the cost and accessibility benefit of running locally."
+        },
+        {
+            "sentence": "This coding agent has a very minimal set of tools.",
+            "start_time": 23.580000000000002,
+            "end_time": 26.18,
+            "compositionId": "TitleScreenStill",
+            "compositionProps": {
+                "titleText": "Minimal Toolset 🛠️",
+                "titleColor": "#000000"
+            },
+            "notes": "Introduce the agent's minimal tool structure."
+        },
+        {
+            "sentence": "The agent has access to the following tools.",
+            "start_time": 26.92,
+            "end_time": 29.32,
+            "compositionId": "TitleScreenStill",
+            "compositionProps": {
+                "titleText": "Tools Access: (9 Available in Code)",
+                "titleColor": "#000000"
+            },
+            "notes": "Transition to listing the specific tools, noting there are more available in the source code."
+        },
+        {
+            "sentence": "The most used tools are red file, list files, edit file and run command tools.",
+            "start_time": 29.92,
+            "end_time": 32.73,
+            "compositionId": "TextScreen",
+            "compositionProps": {
+                "titleText": "Key Tools (1/2):",
+                "markdownText": "📝 Read File\n📂 List Files"
+            },
+            "notes": "List the first two most-used tools (from the `available_tools` dict in the code)."
+        },
+        {
+            "sentence": "The most used tools are red file, list files, edit file and run command tools.",
+            "start_time": 32.73,
+            "end_time": 35.54,
+            "compositionId": "TextScreen",
+            "compositionProps": {
+                "titleText": "Key Tools (2/2):",
+                "markdownText": "✏️ Edit File\n▶️ Run Command"
+            },
+            "notes": "List the remaining two most-used tools."
+        },
+        {
+            "sentence": "It essentially runs in a loop as long as there are tool calls and responses.",
+            "start_time": 36.22,
+            "end_time": 40.1,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "Agent Core Loop (Python) 🔄",
+                "steps": [
+                    {
+                        "code": "while True:\n  user_input = colored_input('User: ')\n  messages.append({'role': 'user', 'content': user_input})\n  while True:\n    stream = client.chat(model=model, messages=messages, tools=[...], stream=True)\n    ...\n    if tool_calls:\n      # Execute tools and loop again\n    else:\n      # Break inner loop (finished step)\n      break",
+                        "title": "Tool Call Logic"
+                    }
+                ],
+                "language": "python",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Visually represent the core `while True` loop structure from the Python code."
+        },
+        {
+            "sentence": "For example, in the first response, it might try to read the project structure using list files tool.",
+            "start_time": 40.62,
+            "end_time": 45.76,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "1. LLM Response: list_files Tool Call 📂",
+                "steps": [
+                    {
+                        "code": "{\n  \"tool_calls\": [\n    {\n      \"function\": {\n        \"name\": \"list_files\",\n        \"arguments\": {}\n      }\n    }\n  ]\n}",
+                        "title": "LLM requests file list (JSON)"
+                    }
+                ],
+                "language": "json",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Show the LLM's first response as a JSON tool call for `list_files`."
+        },
+        {
+            "sentence": "The result from list files is then again fed to the LLM, then it finds the file it wants to change.",
+            "start_time": 46.24,
+            "end_time": 48.76,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "2. Tool Result Feedback ➡️ LLM 🧠",
+                "steps": [
+                    {
+                        "code": "messages.append({\n    'role': 'tool',\n    'content': 'Result: main.py, README.md, utils',\n    'tool_name': 'list_files'\n})",
+                        "title": "Tool Output Added to History"
+                    }
+                ],
+                "language": "python",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Show the tool result being appended to the message history with role 'tool'."
+        },
+        {
+            "sentence": "The result from list files is then again fed to the LLM, then it finds the file it wants to change.",
+            "start_time": 48.76,
+            "end_time": 51.28,
+            "compositionId": "TypewriterText",
+            "compositionProps": {
+                "text": "LLM Finds Target File 🎯",
+                "speed": 3
+            },
+            "notes": "Focus on the LLM's decision to find the target file based on the tool result."
+        },
+        {
+            "sentence": "For example, main.py in a Python project.",
+            "start_time": 51.82,
+            "end_time": 54.34,
+            "compositionId": "TextScreen",
+            "compositionProps": {
+                "titleText": "Target File Example:",
+                "markdownText": "python/main.py 🐍"
+            },
+            "notes": "Provide a concrete example of the target file."
+        },
+        {
+            "sentence": "And then it uses read file tool to read the code in that file.",
+            "start_time": 54.34,
+            "end_time": 58.12,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "3. read_file Tool Call 📝",
+                "steps": [
+                    {
+                        "code": "{\n  \"tool_calls\": [\n    {\n      \"function\": {\n        \"name\": \"read_file\",\n        \"arguments\": {\"filepath\": \"main.py\"}\n      }\n    }\n  ]\n}",
+                        "title": "LLM calls read_file"
+                    }
+                ],
+                "language": "json",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Show the LLM's request to read the file."
+        },
+        {
+            "sentence": "In the next loop step, it tries to edit the file using edit file or write file tool and make the changes.",
+            "start_time": 58.64,
+            "end_time": 63.5,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "4. edit_file Tool Call ✏️",
+                "steps": [
+                    {
+                        "code": "{\n  \"tool_calls\": [\n    {\n      \"function\": {\n        \"name\": \"edit_file\",\n        \"arguments\": {\"filepath\": \"main.py\", \"search_pattern\": \"# TODO\", \"replacement\": \"# Error check implemented\"}\n      }\n    }\n  ]\n}",
+                        "title": "LLM calls edit_file with changes"
+                    }
+                ],
+                "language": "json",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Show the LLM's request to edit the file using `edit_file`."
+        },
+        {
+            "sentence": "Once LLM thinks its complete the task asked in the user prompt. it stops the tool calls and responds with more questions for future tasks or summary of what it has done.",
+            "start_time": 64.14,
+            "end_time": 67.5,
+            "compositionId": "TypewriterText",
+            "compositionProps": {
+                "text": "Task Completed? ✅ Stop Tool Calls!",
+                "speed": 3
+            },
+            "notes": "Signal the completion of the task."
+        },
+        {
+            "sentence": "Once LLM thinks its complete the task asked in the user prompt. it stops the tool calls and responds with more questions for future tasks or summary of what it has done.",
+            "start_time": 67.5,
+            "end_time": 72.68,
+            "compositionId": "CodeTransition",
+            "compositionProps": {
+                "title": "Inner Loop Break Condition",
+                "steps": [
+                    {
+                        "code": "# LLM returns no 'tool_calls', only 'content'.\n\nif tool_calls:\n  # ... execute tools\nelse:\n  # no more tool calls, we can stop the loop\n  break",
+                        "title": "Inner Loop Termination"
+                    }
+                ],
+                "language": "python",
+                "theme": "github-dark",
+                "transitionDuration": 30
+            },
+            "notes": "Visually show the loop break condition from the code when no `tool_calls` are found."
+        }
+    ]
+}

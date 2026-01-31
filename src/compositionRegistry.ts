@@ -1,7 +1,5 @@
 import { ComponentType } from "react";
 import { z } from "zod";
-import { HelloWorld, myCompSchema } from "./HelloWorld";
-import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import MasterSequenceComp, { Shot } from "./MasterSequenceComp";
 import {
     TitleScreen as TitleScreenStill,
@@ -12,8 +10,8 @@ import {
     TypewriterText,
     TitleScreenDotBg,
     TextScreen,
-    CodeSnippet,
 } from "./3.still-test";
+import { DynamicCards, dynamicCardsSchema } from "./4.components-col";
 import { MainComposition } from "./CodeTransitionComposition";
 import { calculateMetadata } from "./code-utils/calculate-metadata";
 
@@ -32,10 +30,16 @@ const convertTranscriptToShots = (transcript: any, useNextShotStartTimeForDurati
             // Use the next shot's start_time to calculate duration
             const nextStartTime = shots[index + 1].start_time;
             durationSeconds = nextStartTime - startTimeSeconds;
+
         } else {
             // Use the current shot's end_time to calculate duration
             const endTimeSeconds = shot.end_time;
             durationSeconds = endTimeSeconds - startTimeSeconds;
+        }
+        // add 2 seconds to the duration for the last shot
+        if (index === shots.length - 1) {
+            durationSeconds += 2;
+            // console.log("last shot, adding 2 seconds to the duration"); 
         }
 
         return {
@@ -102,7 +106,10 @@ export const compositionRegistry: RegistryEntry[] = [
         defaultProps: {
             titleText: "Image Screen",
             imageSource:
-                "https://imgs.search.brave.com/y4aahJnEro56covSl-3LEdHiGClPuWSYadZA02mpws8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbGF5/LWxoLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9mS25scFl3ejla/b1ZKMUYwR0VCN0FV/MjI0T09iRDRxQnZX/NlpjY3BBY2NWN25H/U0tfbFNIRFd1eWtV/T0xlNjVoNzJJPXc1/MjYtaDI5Ni1ydw",
+                "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=2670",
+            comments: "available photos are you can pass direct local path like screenshot1.png \
+             if local image list is provided OR \n use image urls. \
+             \ don't use this composition if relevant image is not provided. In notes, describe the image you're using.",
         },
     },
     {
@@ -115,8 +122,12 @@ export const compositionRegistry: RegistryEntry[] = [
             titleText: "Avatar Screen Left Alignment",
             imageSource:
                 "avatars/avatar-hand-fold.png",
-            alignment: "left",
+            alignment: "center",
+            comments: "available photos are avatars/avatar-hand-fold.png and avatars/avatar-hand-thumbsup.png \
+            \n- Avatar Screen Right Alignment use left, center or right, \
+            \n text is not shown when alignment is center",
         },
+
     },
     // {
     //     id: "HelloWorld",
@@ -169,7 +180,7 @@ export const compositionRegistry: RegistryEntry[] = [
         width: 1920,
         height: 1080,
         fps: 30,
-        durationInFrames: 2181, // Total duration from transcript (72.68s * 30fps)
+        durationInFrames: convertTranscriptToShots(transcriptData).reduce((acc, shot) => acc + shot.durationInFrames, 0), // Total duration from transcript (72.68s * 30fps)
         defaultProps: {
             shots: convertTranscriptToShots(transcriptData),
         },
@@ -196,14 +207,30 @@ export const compositionRegistry: RegistryEntry[] = [
         height: 1080,
         // schema: myCompSchema3,
         defaultProps: {
-            titleText: "Text Screen",
-            longMultiLineText: `This is a start of a pragraph or a bullet list.
-
-            - Item 1
-
-            - Item 2
-
-            - Item 3`,
+            titleText: "",
+            markdownText: "This is a start of a markdown pragraph or a bullet list. \n- Item 1 \n-  Item 2 \n- Item 3",
+        },
+    },
+    {
+        id: "DynamicCards",
+        kind: "still",
+        component: DynamicCards,
+        width: 1920,
+        height: 1080,
+        schema: dynamicCardsSchema,
+        defaultProps: {
+            titleText: "Dynamic Card Layout",
+            titleColor: "#ffffff",
+            cards: [
+                { title: "Card One" },
+                { title: "Card Two" },
+                { title: "Card Three" },
+                { title: "Card Four" },
+                { title: "Card Five" },
+                { title: "Card Six" },
+            ],
+            comments: "Dynamic Cards, you can add 1 to 6 cards and the size dynamically. \
+            \n this can be used for a list of features or a list of benefits. or to just show a grid of titles or items.",
         },
     },
     //     {
@@ -238,35 +265,50 @@ export const compositionRegistry: RegistryEntry[] = [
             title: "",
             steps: [
                 {
+                    code: `def calculate_sum(a, b):\n    return a + b\n\nif __name__ == '__main__':\n    print(calculate_sum(5, 3))\n`,
+                    title: "Initial Function",
+                },
+                {
+                    code: `def calculate_sum(a, b):\n    # Add error handling for non-numeric input\n    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):\n        raise ValueError("Both arguments must be numbers")\n    return a + b\n\nif __name__ == '__main__':\n    print(calculate_sum(5, 3))\n    # print(calculate_sum("5", 3))  # Uncomment to see error handling`,
+                    title: "Add Error Handling",
+                },
+                {
+                    code: `def calculate_sum(a, b):\n    """Return the sum of two numbers after validating input."""\n    # Add error handling for non-numeric input\n    if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):\n        raise ValueError("Both arguments must be numbers")\n    result = a + b\n    print(f"Adding {a} and {b}: {result}")\n    return result\n\nif __name__ == '__main__':\n    print(calculate_sum(5, 3))\n    try:\n        print(calculate_sum("5", 3))\n    except ValueError as e:\n        print(e)`,
+                    title: "Add Print and Docstring",
+                },
+            ],
+            language: "python",
+            theme: "github-dark",
+            transitionDuration: 30,
+            comment: "For CodeTransition composition, you can add add multiple steps of a coding concept you want to show and the code will transition between them. \
+            \n Always show step by step changes and add a title to each step. "
+        },
+    },
+    {
+        id: "CodeStill",
+        kind: "composition",
+        component: MainComposition,
+        width: 1920,
+        height: 1080,
+        fps: 30,
+        durationInFrames: 120, // 9 seconds for 3 steps with 90 frames each
+        schema: codeTransitionSchema,
+        calculateMetadata: calculateMetadata,
+        defaultProps: {
+            title: "",
+            steps: [
+                {
                     code: `def calculate_sum(a, b): \n # TODO: Add error handling\n \nreturn a + b\n\nif __name__ == '__main__': \n    print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n     print(calculate_sum(5, 3))  \n `,
 
                 },
-                //                 {
-                //                     code: `const user = {
-                //   name: 'Lorem',
-                //   age: 26,
-                // };
-                // // @errors: 2339
-                // console.log(user.location);`,
-                //                     title: "Error Example",
-                //                 },
-                //                 {
-                //                     code: `const user = {
-                //   name: 'Lorem',
-                //   age: 26,
-                //   location: 'Ipsum',
-                // };
 
-                // console.log(user.location);
-                // //           ^?`,
-                //                     title: "With Location",
-                //                 },
             ],
             language: "python",
             theme: "github-dark",
             transitionDuration: 30,
         },
     },
+
 ];
 
 export const compositionIdToEntry = Object.fromEntries(
