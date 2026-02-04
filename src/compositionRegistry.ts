@@ -14,6 +14,7 @@ import {
 import { DynamicCards, dynamicCardsSchema } from "./4.components-col";
 import { MainComposition } from "./CodeTransitionComposition";
 import { calculateMetadata } from "./code-utils/calculate-metadata";
+import { VideoScreen } from "./VideosInSequence";
 
 // Import transcript data
 import transcriptData from "../public/transcript.json";
@@ -67,6 +68,13 @@ export const codeTransitionSchema = z.object({
     theme: z.enum(["github-dark", "github-light", "dracula", "monokai", "vs-dark"]).optional().describe("Code theme (default: github-dark)"),
     transitionDuration: z.number().optional().describe("Duration of transition in frames (default: 30)"),
     codeWidth: z.number().optional().describe("Width of code area in pixels (default: auto)"),
+});
+
+// Schema for VideoScreen component
+export const videoScreenSchema = z.object({
+    videoSource: z.string().optional().describe("Video source - can be local path or URL (defaults to Big_Buck_Bunny_360_10s_1MB.mp4)"),
+    titleText: z.string().optional().describe("Optional title text to display below the video"),
+    maxTime: z.number().optional().describe("Maximum time in seconds to play the video (optional)"),
 });
 
 export type RegistryEntry = {
@@ -306,6 +314,22 @@ export const compositionRegistry: RegistryEntry[] = [
             language: "python",
             theme: "github-dark",
             transitionDuration: 30,
+        },
+    },
+    {
+        id: "VideoScreen",
+        kind: "composition",
+        component: VideoScreen,
+        width: 1920,
+        height: 1080,
+        fps: 30,
+        durationInFrames: 300, // 10 seconds default, can be overridden with maxTime
+        schema: videoScreenSchema,
+        defaultProps: {
+            videoSource: "videos/Big_Buck_Bunny_360_10s_1MB.mp4",
+            titleText: "",
+            maxTime: 10, // 10 seconds default
+            comments: "Video playback component. Pass videoSource as local path or URL. Defaults to Big_Buck_Bunny_360_10s_1MB.mp4 if not provided. Use maxTime to limit playback duration in seconds.",
         },
     },
 

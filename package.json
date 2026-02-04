@@ -22,6 +22,7 @@
     "@remotion/renderer": "^4.0.358",
     "@remotion/transitions": "^4.0.362",
     "@remotion/zod-types": "^4.0.0",
+    "@remotion/media": "^4.0.361",
     "@tailwindcss/typography": "^0.5.19",
     "@types/react-syntax-highlighter": "^15.5.13",
     "codehike": "^1.0.7",
@@ -49,5 +50,6 @@
     "tsx": "^4.20.6",
     "typescript": "5.8.2"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
 }
