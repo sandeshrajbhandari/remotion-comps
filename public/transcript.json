@@ -1,251 +1,323 @@
 {
-    "shots": [
-      {
-        "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
-        "start_time": 0.0,
-        "end_time": 2.65,
-        "notes": "Use an animated title screen to introduce the main topic: the coding agent.",
+  "shots": [
+    {
+      "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
+      "start_time": 0,
+      "end_time": 2.65,
+      "notes": "Testing Captions0 composition with word-level timestamps.",
+      "compositionId": "Captions0",
+      "compositionProps": {
+        "style": "tiktok",
+        "captions": [
+          {
+            "text": "I ",
+            "startMs": 0,
+            "endMs": 200,
+            "timestampMs": 100,
+            "confidence": null
+          },
+          {
+            "text": "made ",
+            "startMs": 200,
+            "endMs": 500,
+            "timestampMs": 350,
+            "confidence": null
+          },
+          {
+            "text": "a ",
+            "startMs": 500,
+            "endMs": 600,
+            "timestampMs": 550,
+            "confidence": null
+          },
+          {
+            "text": "coding ",
+            "startMs": 600,
+            "endMs": 1000,
+            "timestampMs": 800,
+            "confidence": null
+          },
+          {
+            "text": "agent ",
+            "startMs": 1000,
+            "endMs": 1400,
+            "timestampMs": 1200,
+            "confidence": null
+          },
+          {
+            "text": "using ",
+            "startMs": 1400,
+            "endMs": 1700,
+            "timestampMs": 1550,
+            "confidence": null
+          },
+          {
+            "text": "Python ",
+            "startMs": 1700,
+            "endMs": 2100,
+            "timestampMs": 1900,
+            "confidence": null
+          },
+          {
+            "text": "and ",
+            "startMs": 2100,
+            "endMs": 2300,
+            "timestampMs": 2200,
+            "confidence": null
+          },
+          {
+            "text": "Ollama.",
+            "startMs": 2300,
+            "endMs": 2650,
+            "timestampMs": 2475,
+            "confidence": null
+          }
+        ]
+      },
+      "_original": {
         "compositionId": "TitleScreenDotBg",
         "compositionProps": {
           "titleText": "Coding Agent <(•_•)>",
           "titleColor": "#000000"
-        }
-      },
-      {
-        "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
-        "start_time": 2.65,
-        "end_time": 5.3,
-        "notes": "Use a technical image to emphasize the hardware constraint (MacBook M1) and the agent's capability.",
-        "compositionId": "ImageScreen",
-        "compositionProps": {
-          "titleText": "Runs on MacBook M1 (4 years old)",
-          "imageSource": "https://images.unsplash.com/photo-1491472253230-a044054ca35f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXBwbGUlMjBtYWNib29rfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-        }
-      },
-      {
-        "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
-        "start_time": 6.04,
-        "end_time": 9.65,
-        "notes": "Use a simple text screen to highlight the learning objective and understanding 'under the hood' workings.",
-        "compositionId": "TextScreen",
-        "compositionProps": {
-          "markdownText": "## A Great Learning Experience 🤔\n\n- Understand how advanced agents work\n- Knowledge of inner workings"
-        }
-      },
-      {
-        "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
-        "start_time": 9.65,
-        "end_time": 13.26,
-        "notes": "Use dynamic cards to visually list the advanced agents mentioned as a point of reference.",
-        "compositionId": "DynamicCards",
-        "compositionProps": {
-          "titleText": "Advanced Coding Agents",
-          "titleColor": "#ffffff",
-          "cards": [
-            {
-              "title": "Claude Code"
-            },
-            {
-              "title": "Cursor"
-            },
-            {
-              "title": "GitHub Copilot"
-            }
-          ]
-        }
-      },
-      {
-        "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
-        "start_time": 13.84,
-        "end_time": 18.26,
-        "notes": "Use an avatar screen with a left alignment to introduce the topic of small, local models (8B models) from the speaker's perspective.",
-        "compositionId": "AvatarScreen",
-        "compositionProps": {
-          "titleText": "Small, Local 8B Models (e.g., Qwen 8B)",
-          "imageSource": "avatars/avatar-hand-fold.png",
-          "alignment": "left"
-        }
-      },
-      {
-        "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
-        "start_time": 18.26,
-        "end_time": 22.68,
-        "notes": "Highlight the key benefit: running for free on local hardware for various tasks.",
-        "compositionId": "TextScreen",
-        "compositionProps": {
-          "markdownText": "### 💰 Run on your hardware for FREE!\n\n- Local execution\n- Different coding tasks"
-        }
-      },
-      {
-        "sentence": "This coding agent has a very minimal set of tools.",
-        "start_time": 23.580000000000002,
-        "end_time": 26.18,
-        "notes": "Use a typewriter effect to emphasize the key characteristic: 'minimal set of tools'.",
-        "compositionId": "TypewriterText",
-        "compositionProps": {
-          "text": "Minimal Set of Tools"
-        }
-      },
-      {
-        "sentence": "The agent has access to the following tools.",
-        "start_time": 26.92,
-        "end_time": 29.32,
-        "notes": "Use a simple title screen as a transition to introduce the list of tools.",
-        "compositionId": "TitleScreenStill",
-        "compositionProps": {
-          "titleText": "Agent Tool Access 🛠️",
-          "titleColor": "#000000"
-        }
-      },
-      {
-        "sentence": "The most used tools are red file, list files, edit file and run command tools.",
-        "start_time": 29.92,
-        "end_time": 35.54,
-        "notes": "Use dynamic cards to clearly list the four most important tools the agent uses.",
-        "compositionId": "DynamicCards",
-        "compositionProps": {
-          "titleText": "Most Used Tools",
-          "titleColor": "#ffffff",
-          "cards": [
-            {
-              "title": "Read File"
-            },
-            {
-              "title": "List Files"
-            },
-            {
-              "title": "Edit File"
-            },
-            {
-              "title": "Run Command"
-            }
-          ]
-        }
-      },
-      {
-        "sentence": "It essentially runs in a loop as long as there are tool calls and responses.",
-        "start_time": 36.22,
-        "end_time": 40.1,
-        "notes": "Simplified focused loop, use CodeStill for direct code illustration.",
-        "compositionId": "CodeStill",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "while tool_calls in response:\n    execute_tool()\n    add_tool_result_to_llm_request()\n    # repeat until no more tool calls in response\nask_for_user_input()"
-            }
-          ],
-          "language": "python",
-          "theme": "github-dark",
-          "transitionDuration": 30
-        }
-      },
-      {
-        "sentence": "For example, in the first response, it might try to read the project structure using list files tool.",
-        "start_time": 40.62,
-        "end_time": 45.76,
-        "notes": "Use a code still to visually represent the output of the 'list files' command in a project structure.",
-        "compositionId": "CodeStill",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "tool_calls=[\n  {\n    \"function\": {\n      \"name\": \"list_files\",\n      \"arguments\": {\"./\"}\n    }\n  }\n]"
-            }
-          ],
-          "language": "python",
-          "theme": "github-dark"
-        }
-      },
-      {
-        "sentence": "The tool response is shown to the user, and then this data is sent back to the LLM for further processing.",
-        "start_time": 46.24,
-        "end_time": 48.76,
-        "notes": "Visualize the tool response and how it's incorporated into the LLM request.",
-        "compositionId": "CodeStill",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "// Tool response\n{\n  \"files\": [\n    \"main.py\",\n    \"utils.py\",\n    \"README.md\"\n  ]\n}\n\n// Data sent to LLM\nllm_request = {\n   \"tool_response\": {\n    \"files\": [\"main.py\", \"utils.py\", \"README.md\"]\n  }\n}"
-            }
-          ],
-          "language": "javascript",
-          "theme": "github-dark"
-        }
-      },
-      {
-        "sentence": "For example, main.py in a Python project.",
-        "start_time": 51.82,
-        "end_time": 54.34,
-        "notes": "Use a typewriter effect to call out a specific file example to continue the narrative.",
-        "compositionId": "TypewriterText",
-        "compositionProps": {
-          "text": "For example: main.py in a Python project."
-        }
-      },
-      {
-        "sentence": "And then it uses read file tool to read the code in that file.",
-        "start_time": 54.34,
-        "end_time": 58.12,
-        "notes": "Use a code still to demonstrate the 'read file' tool being executed and showing the contents of the file.",
-        "compositionId": "CodeStill",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "tool_calls=[\n  {\n    \"function\": {\n      \"name\": \"read_file\",\n      \"arguments\": {\"filepath\": \"main.py\"}\n    }\n  }\n] \n\n#main.py file\ndef calculate_sum(a, b):\n    return a + b\n\n# Code is now in context..."
-            }
-          ],
-          "language": "python",
-          "theme": "github-dark"
-        }
-      },
-      {
-        "sentence": "In the next loop step, it tries to edit the file using edit file or write file tool and make the changes.",
-        "start_time": 58.64,
-        "end_time": 63.5,
-        "notes": "Use a code transition to visually represent the 'edit file' tool making actual changes to the code.",
-        "compositionId": "CodeTransition",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "def calculate_sum(a, b):\n    return a + b\n",
-              "title": "Before Edit"
-            },
-            {
-              "code": "def calculate_sum(a, b):\n    # Adding a new feature\n    if a > 0 and b > 0:\n        return a + b\n    else:\n        return 0\n",
-              "title": "After Edit"
-            }
-          ],
-          "language": "python",
-          "theme": "github-dark",
-          "transitionDuration": 30
-        }
-      },
-      {
-        "sentence": "Once LLM thinks it has completed the task in the user prompt, it stops the tool calls and responds with more questions for future tasks or a summary of what it has done.",
-        "start_time": 64.14,
-        "end_time": 68.41,
-        "notes": "Use a center-aligned avatar with a thumbs-up to signify task completion and the end of the tool call loop.",
-        "compositionId": "AvatarScreen",
-        "compositionProps": {
-          "imageSource": "avatars/avatar-hand-thumbsup.png",
-          "alignment": "center"
-        }
-      },
-      {
-        "sentence": "Once LLM thinks it has completed the task in the user prompt, it stops the tool calls and responds with more questions for future tasks or a summary of what it has done.",
-        "start_time": 68.41,
-        "end_time": 72.68,
-        "notes": "Use a code still to show a terminal agent (LLM) asking if the task is done and what to do next.",
-        "compositionId": "CodeStill",
-        "compositionProps": {
-          "steps": [
-            {
-              "code": "user@agent:~$ python agent.py --task \"Add sum function\"\n...\n[Agent]: Task completed. \nWhat else do you want me to do?\n",
-              "title": "Terminal output"
-            }
-          ],
-          "language": "bash",
-          "theme": "github-dark"
-        }
+        },
+        "notes": "Use an animated title screen to introduce the main topic: the coding agent."
       }
-    ]
-  }
+    },
+    {
+      "sentence": "I made a coding agent using Python and Olamma that runs on my 4-year-old MacBook M1.",
+      "start_time": 2.65,
+      "end_time": 5.3,
+      "notes": "Use a technical image to emphasize the hardware constraint (MacBook M1) and the agent's capability.",
+      "compositionId": "ImageScreen",
+      "compositionProps": {
+        "titleText": "Runs on MacBook M1 (4 years old)",
+        "imageSource": "https://images.unsplash.com/photo-1491472253230-a044054ca35f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXBwbGUlMjBtYWNib29rfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
+      }
+    },
+    {
+      "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
+      "start_time": 6.04,
+      "end_time": 9.65,
+      "notes": "Use a simple text screen to highlight the learning objective and understanding 'under the hood' workings.",
+      "compositionId": "TextScreen",
+      "compositionProps": {
+        "markdownText": "## A Great Learning Experience 🤔\n\n- Understand how advanced agents work\n- Knowledge of inner workings"
+      }
+    },
+    {
+      "sentence": "This was a great learning experience to understand how more advanced coding agents like Cloud Code, cursor and GitHub Copilot works under the hood.",
+      "start_time": 9.65,
+      "end_time": 13.26,
+      "notes": "Use dynamic cards to visually list the advanced agents mentioned as a point of reference.",
+      "compositionId": "DynamicCards",
+      "compositionProps": {
+        "titleText": "Advanced Coding Agents",
+        "titleColor": "#ffffff",
+        "cards": [
+          {
+            "title": "Claude Code"
+          },
+          {
+            "title": "Cursor"
+          },
+          {
+            "title": "GitHub Copilot"
+          }
+        ]
+      }
+    },
+    {
+      "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
+      "start_time": 13.84,
+      "end_time": 18.26,
+      "notes": "Use an avatar screen with a left alignment to introduce the topic of small, local models (8B models) from the speaker's perspective.",
+      "compositionId": "AvatarScreen",
+      "compositionProps": {
+        "titleText": "Small, Local 8B Models (e.g., Qwen 8B)",
+        "imageSource": "avatars/avatar-hand-fold.png",
+        "alignment": "left"
+      }
+    },
+    {
+      "sentence": "It also showcases how small and local 8B models, like when 8B, that can literally run on your hardware for free, perform under different coding tasks.",
+      "start_time": 18.26,
+      "end_time": 22.68,
+      "notes": "Highlight the key benefit: running for free on local hardware for various tasks.",
+      "compositionId": "TextScreen",
+      "compositionProps": {
+        "markdownText": "### 💰 Run on your hardware for FREE!\n\n- Local execution\n- Different coding tasks"
+      }
+    },
+    {
+      "sentence": "This coding agent has a very minimal set of tools.",
+      "start_time": 23.580000000000002,
+      "end_time": 26.18,
+      "notes": "Use a typewriter effect to emphasize the key characteristic: 'minimal set of tools'.",
+      "compositionId": "TypewriterText",
+      "compositionProps": {
+        "text": "Minimal Set of Tools"
+      }
+    },
+    {
+      "sentence": "The agent has access to the following tools.",
+      "start_time": 26.92,
+      "end_time": 29.32,
+      "notes": "Use a simple title screen as a transition to introduce the list of tools.",
+      "compositionId": "TitleScreenStill",
+      "compositionProps": {
+        "titleText": "Agent Tool Access 🛠️",
+        "titleColor": "#000000"
+      }
+    },
+    {
+      "sentence": "The most used tools are red file, list files, edit file and run command tools.",
+      "start_time": 29.92,
+      "end_time": 35.54,
+      "notes": "Use dynamic cards to clearly list the four most important tools the agent uses.",
+      "compositionId": "DynamicCards",
+      "compositionProps": {
+        "titleText": "Most Used Tools",
+        "titleColor": "#ffffff",
+        "cards": [
+          {
+            "title": "Read File"
+          },
+          {
+            "title": "List Files"
+          },
+          {
+            "title": "Edit File"
+          },
+          {
+            "title": "Run Command"
+          }
+        ]
+      }
+    },
+    {
+      "sentence": "It essentially runs in a loop as long as there are tool calls and responses.",
+      "start_time": 36.22,
+      "end_time": 40.1,
+      "notes": "Simplified focused loop, use CodeStill for direct code illustration.",
+      "compositionId": "CodeStill",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "while tool_calls in response:\n    execute_tool()\n    add_tool_result_to_llm_request()\n    # repeat until no more tool calls in response\nask_for_user_input()"
+          }
+        ],
+        "language": "python",
+        "theme": "github-dark",
+        "transitionDuration": 30
+      }
+    },
+    {
+      "sentence": "For example, in the first response, it might try to read the project structure using list files tool.",
+      "start_time": 40.62,
+      "end_time": 45.76,
+      "notes": "Use a code still to visually represent the output of the 'list files' command in a project structure.",
+      "compositionId": "CodeStill",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "tool_calls=[\n  {\n    \"function\": {\n      \"name\": \"list_files\",\n      \"arguments\": {\"./\"}\n    }\n  }\n]"
+          }
+        ],
+        "language": "python",
+        "theme": "github-dark"
+      }
+    },
+    {
+      "sentence": "The tool response is shown to the user, and then this data is sent back to the LLM for further processing.",
+      "start_time": 46.24,
+      "end_time": 48.76,
+      "notes": "Visualize the tool response and how it's incorporated into the LLM request.",
+      "compositionId": "CodeStill",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "// Tool response\n{\n  \"files\": [\n    \"main.py\",\n    \"utils.py\",\n    \"README.md\"\n  ]\n}\n\n// Data sent to LLM\nllm_request = {\n   \"tool_response\": {\n    \"files\": [\"main.py\", \"utils.py\", \"README.md\"]\n  }\n}"
+          }
+        ],
+        "language": "javascript",
+        "theme": "github-dark"
+      }
+    },
+    {
+      "sentence": "For example, main.py in a Python project.",
+      "start_time": 51.82,
+      "end_time": 54.34,
+      "notes": "Use a typewriter effect to call out a specific file example to continue the narrative.",
+      "compositionId": "TypewriterText",
+      "compositionProps": {
+        "text": "For example: main.py in a Python project."
+      }
+    },
+    {
+      "sentence": "And then it uses read file tool to read the code in that file.",
+      "start_time": 54.34,
+      "end_time": 58.12,
+      "notes": "Use a code still to demonstrate the 'read file' tool being executed and showing the contents of the file.",
+      "compositionId": "CodeStill",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "tool_calls=[\n  {\n    \"function\": {\n      \"name\": \"read_file\",\n      \"arguments\": {\"filepath\": \"main.py\"}\n    }\n  }\n] \n\n#main.py file\ndef calculate_sum(a, b):\n    return a + b\n\n# Code is now in context..."
+          }
+        ],
+        "language": "python",
+        "theme": "github-dark"
+      }
+    },
+    {
+      "sentence": "In the next loop step, it tries to edit the file using edit file or write file tool and make the changes.",
+      "start_time": 58.64,
+      "end_time": 63.5,
+      "notes": "Use a code transition to visually represent the 'edit file' tool making actual changes to the code.",
+      "compositionId": "CodeTransition",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "def calculate_sum(a, b):\n    return a + b\n",
+            "title": "Before Edit"
+          },
+          {
+            "code": "def calculate_sum(a, b):\n    # Adding a new feature\n    if a > 0 and b > 0:\n        return a + b\n    else:\n        return 0\n",
+            "title": "After Edit"
+          }
+        ],
+        "language": "python",
+        "theme": "github-dark",
+        "transitionDuration": 30
+      }
+    },
+    {
+      "sentence": "Once LLM thinks it has completed the task in the user prompt, it stops the tool calls and responds with more questions for future tasks or a summary of what it has done.",
+      "start_time": 64.14,
+      "end_time": 68.41,
+      "notes": "Use a center-aligned avatar with a thumbs-up to signify task completion and the end of the tool call loop.",
+      "compositionId": "AvatarScreen",
+      "compositionProps": {
+        "imageSource": "avatars/avatar-hand-thumbsup.png",
+        "alignment": "center"
+      }
+    },
+    {
+      "sentence": "Once LLM thinks it has completed the task in the user prompt, it stops the tool calls and responds with more questions for future tasks or a summary of what it has done.",
+      "start_time": 68.41,
+      "end_time": 72.68,
+      "notes": "Use a code still to show a terminal agent (LLM) asking if the task is done and what to do next.",
+      "compositionId": "CodeStill",
+      "compositionProps": {
+        "steps": [
+          {
+            "code": "user@agent:~$ python agent.py --task \"Add sum function\"\n...\n[Agent]: Task completed. \nWhat else do you want me to do?\n",
+            "title": "Terminal output"
+          }
+        ],
+        "language": "bash",
+        "theme": "github-dark"
+      }
+    }
+  ]
+}

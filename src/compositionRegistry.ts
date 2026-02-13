@@ -15,6 +15,8 @@ import { DynamicCards, dynamicCardsSchema } from "./4.components-col";
 import { MainComposition } from "./CodeTransitionComposition";
 import { calculateMetadata } from "./code-utils/calculate-metadata";
 import { VideoScreen } from "./VideosInSequence";
+import { Captions0 } from "./Captions0";
+import type { Caption } from "@remotion/captions";
 
 // Import transcript data
 import transcriptData from "../public/transcript.json";
@@ -75,6 +77,18 @@ export const videoScreenSchema = z.object({
     videoSource: z.string().optional().describe("Video source - can be local path or URL (defaults to Big_Buck_Bunny_360_10s_1MB.mp4)"),
     titleText: z.string().optional().describe("Optional title text to display below the video"),
     maxTime: z.number().optional().describe("Maximum time in seconds to play the video (optional)"),
+});
+
+// Schema for Captions0 component
+export const captions0Schema = z.object({
+    captions: z.array(z.object({
+        text: z.string(),
+        startMs: z.number(),
+        endMs: z.number(),
+        timestampMs: z.number(),
+        confidence: z.number().nullable(),
+    })).describe("Word-level caption timestamps"),
+    style: z.enum(["highlight", "bounce", "karaoke", "tiktok"]).describe("Caption display style"),
 });
 
 export type RegistryEntry = {
@@ -330,6 +344,32 @@ export const compositionRegistry: RegistryEntry[] = [
             titleText: "",
             maxTime: 10, // 10 seconds default
             comments: "Video playback component. Pass videoSource as local path or URL. Defaults to Big_Buck_Bunny_360_10s_1MB.mp4 if not provided. Use maxTime to limit playback duration in seconds.",
+        },
+    },
+
+    {
+        id: "Captions0",
+        kind: "composition",
+        component: Captions0,
+        width: 1920,
+        height: 1080,
+        fps: 30,
+        durationInFrames: 150, // 5 seconds default preview
+        schema: captions0Schema,
+        defaultProps: {
+            captions: [
+                { text: "Hello ", startMs: 0, endMs: 500, timestampMs: 250, confidence: 1 },
+                { text: "world, ", startMs: 500, endMs: 1000, timestampMs: 750, confidence: 1 },
+                { text: "this ", startMs: 1000, endMs: 1300, timestampMs: 1150, confidence: 1 },
+                { text: "is ", startMs: 1300, endMs: 1500, timestampMs: 1400, confidence: 1 },
+                { text: "a ", startMs: 1500, endMs: 1700, timestampMs: 1600, confidence: 1 },
+                { text: "caption ", startMs: 1700, endMs: 2200, timestampMs: 1950, confidence: 1 },
+                { text: "test.", startMs: 2200, endMs: 2800, timestampMs: 2500, confidence: 1 },
+            ] as Caption[],
+            style: "highlight" as const,
+            comments: "Captions overlay composition. Receives word-level Caption[] timestamps and a style variant. \
+            \n Styles: highlight (green active word), bounce (scale up active word), karaoke (progressive fill). \
+            \n Used as an overlay in MasterSequence - the captions array is auto-populated from wordlevel-timestamp.json during preprocessing.",
         },
     },
 

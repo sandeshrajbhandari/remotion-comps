@@ -11,9 +11,15 @@ importers:
       '@code-hike/lighter':
         specifier: ^1.0.3
         version: 1.0.3
+      '@remotion/animation-utils':
+        specifier: ^4.0.421
+        version: 4.0.421(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@remotion/bundler':
         specifier: ^4.0.358
         version: 4.0.358(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@remotion/captions':
+        specifier: ^4.0.421
+        version: 4.0.421
       '@remotion/cli':
         specifier: ^4.0.0
         version: 4.0.358(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -585,6 +591,12 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@remotion/animation-utils@4.0.421':
+    resolution: {integrity: sha512-lgAM6U9pUmZCsTADrCdZvWsOFQkqhrn0igOZ317qqpsU45LZoqX0XNb1I2EMR0+8yPTwqXQnaMIHpxj8hQlguA==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   '@remotion/bundler@4.0.357':
     resolution: {integrity: sha512-9WNCLCBDSTgS/CP588k7hufqTaWRoatp5sTgwrhYKgrwJegdcTFdb5v0oQm/WDzpP2t2q76MTCe4fs8kYNolXQ==}
     peerDependencies:
@@ -596,6 +608,9 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
+
+  '@remotion/captions@4.0.421':
+    resolution: {integrity: sha512-7mwzy/cegNN+OnFzk87hFawunjCTq1CaoINNUPgs/BYzkguaF6MHxc0PzZ1lxGqBkkzil5Eu30wgExIRmUq4pQ==}
 
   '@remotion/cli@4.0.358':
     resolution: {integrity: sha512-qD8T6CyY81rL9rBAVwjPsbsHz0LXPpHUpOPXGZpeccsoQ1bhIUgCax4fWUh+ylY5xKenQoDTr1+pyg/zCpducA==}
@@ -2473,6 +2488,12 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  remotion@4.0.421:
+    resolution: {integrity: sha512-j64KtcwObNYpxskxBPd7zDXVOwSHxH31RIM6Vs/+rUj/NBry/LXc8cNWDwFC4fYaJweOAeM7zXY16kW/9t3X+w==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
@@ -3303,6 +3324,12 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@remotion/animation-utils@4.0.421(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      remotion: 4.0.421(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+
   '@remotion/bundler@4.0.357(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@remotion/media-parser': 4.0.357
@@ -3346,6 +3373,8 @@ snapshots:
       - uglify-js
       - utf-8-validate
       - webpack-cli
+
+  '@remotion/captions@4.0.421': {}
 
   '@remotion/cli@4.0.358(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -5607,6 +5636,11 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
 
   remotion@4.0.417(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+
+  remotion@4.0.421(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)

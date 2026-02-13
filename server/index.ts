@@ -503,6 +503,136 @@ app.get('/gallery', (req, res) => {
     res.sendFile(path.resolve('./composition-gallery.html'));
 });
 
+// GET /assets - List available media assets (videos, backdrops, avatars) for prompt crafting
+app.get('/assets', async (req, res) => {
+    try {
+        const publicDir = path.resolve('./public');
+        
+        // Helper function to read files from a directory
+        async function getAssetsFromDir(dirPath: string, category: string): Promise<any[]> {
+            try {
+                const fullPath = path.join(publicDir, dirPath);
+                await fs.access(fullPath);
+                const files = await fs.readdir(fullPath);
+                
+                const assets = await Promise.all(
+                    files
+                        .filter(file => {
+                            // Filter by common media extensions
+                            const ext = path.extname(file).toLowerCase();
+                            if (category === 'videos') {
+                                return ['.mp4', '.webm', '.mov', '.avi'].includes(ext);
+                            } else {
+                                return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+                            }
+                        })
+                        .map(async (file) => {
+                            const filePath = path.join(fullPath, file);
+                            const stats = await fs.stat(filePath);
+                            const relativePath = path.join(dirPath, file).replace(/\\/g, '/');
+                            
+                            return {
+                                name: file,
+                                path: relativePath, // e.g., "videos/Big_Buck_Bunny_360_10s_1MB.mp4"
+                                url: `/public/${relativePath}`, // Full URL path
+                                size: stats.size,
+                                sizeFormatted: formatFileSize(stats.size),
+                                modified: stats.mtime.toISOString(),
+                                extension: path.extname(file).toLowerCase().slice(1)
+                            };
+                        })
+                );
+                
+                return assets.sort((a, b) => a.name.localeCompare(b.name));
+            } catch (error) {
+                // Directory doesn't exist or can't be read
+                return [];
+            }
+        }
+        
+        // Helper function to format file size
+        function formatFileSize(bytes: number): string {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+        
+        // Get assets from each category
+        const [videos, backdrops, avatars] = await Promise.all([
+            getAssetsFromDir('videos', 'videos'),
+            getAssetsFromDir('backdrops', 'images'),
+            getAssetsFromDir('avatars', 'images')
+        ]);
+        
+        // Also get any other assets in the root public directory (not in subdirectories)
+        let otherAssets: any[] = [];
+        try {
+            const rootFiles = await fs.readdir(publicDir);
+            const filePromises = rootFiles.map(async (file) => {
+                const filePath = path.join(publicDir, file);
+                const stats = await fs.stat(filePath);
+                // Only include files (not directories) that are in the root
+                if (stats.isFile()) {
+                    return {
+                        name: file,
+                        path: file, // Root level file
+                        url: `/public/${file}`,
+                        size: stats.size,
+                        sizeFormatted: formatFileSize(stats.size),
+                        modified: stats.mtime.toISOString(),
+                        extension: path.extname(file).toLowerCase().slice(1)
+                    };
+                }
+                return null;
+            });
+            
+            const results = await Promise.all(filePromises);
+            otherAssets = results.filter((item): item is NonNullable<typeof item> => item !== null);
+        } catch (error) {
+            // Ignore errors reading root directory
+        }
+        
+        res.json({
+            success: true,
+            assets: {
+                videos: {
+                    count: videos.length,
+                    items: videos,
+                    description: 'Video files available for VideoScreen composition. Use the "path" field in videoSource prop.'
+                },
+                backdrops: {
+                    count: backdrops.length,
+                    items: backdrops,
+                    description: 'Background images available for ImageScreen and other compositions. Use the "path" field in imageSource prop.'
+                },
+                avatars: {
+                    count: avatars.length,
+                    items: avatars,
+                    description: 'Avatar images available for AvatarScreen composition. Use the "path" field in imageSource prop.'
+                },
+                other: {
+                    count: otherAssets.length,
+                    items: otherAssets,
+                    description: 'Other assets in the public directory root'
+                }
+            },
+            usage: {
+                videos: 'Use the "path" value (e.g., "videos/Big_Buck_Bunny_360_10s_1MB.mp4") in VideoScreen composition videoSource prop',
+                backdrops: 'Use the "path" value (e.g., "backdrops/gradient-bg-1.jpg") in ImageScreen composition imageSource prop',
+                avatars: 'Use the "path" value (e.g., "avatars/avatar-hand-fold.png") in AvatarScreen composition imageSource prop'
+            }
+        });
+    } catch (error) {
+        console.error('Error listing assets:', error);
+        res.status(500).json({
+            success: false,
+            error: error instanceof Error ? error.message : 'Unknown error occurred'
+        });
+    }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({
@@ -517,6 +647,7 @@ app.listen(PORT, () => {
     console.log(`Remotion render server running on port ${PORT}`);
     console.log(`Health check: http://localhost:${PORT}/health`);
     console.log(`Available compositions: http://localhost:${PORT}/compositions`);
+    console.log(`Available assets: http://localhost:${PORT}/assets`);
     console.log(`Composition Gallery: http://localhost:${PORT}/gallery`);
 });
 
